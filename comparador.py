@@ -62,14 +62,14 @@ for y in range(matriz):
 		if matriz[y+1][x+1]=="B":
 			matriz[y][x]+=1
 	elif y==alto-1:
-		if matriz[y][x]=="B":
+		if matriz[y-1][x-1]=="B":
 			matriz[y][x]+=1
-		if matriz[y][x]=="B":
+		if matriz[y-1][x]=="B":
 			matriz[y][x]+=1
-		if matriz[y][x]=="B":
+		if matriz[y-1][x+1]=="B":
 			matriz[y][x]+=1
-		if matriz[y][x]=="B":
+		if matriz[y][x-1]=="B":
 			matriz[y][x]+=1
-		if matriz[y][x]=="B":
+		if matriz[y][x+1]=="B":
 			matriz[y][x]+=1
     x+=1
