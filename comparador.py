@@ -1,6 +1,8 @@
 x=0
 for y in range(len(matriz)):
-    if x==0 and y==0:
+    if matriz[y][x]=="B":
+        pass
+    elif x==0 and y==0:
         if matriz[y][x+1]=="B":
             matriz[y][x]+=1
         if matriz[y+1][x]=="B":
