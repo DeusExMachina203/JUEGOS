@@ -129,7 +129,7 @@ print(' ')
 for i in matriz:
    print(*i, sep=' ')
 for y in range(len(matriz)):
-    New_Matriz=[i+10 for i in matriz[y]
+    matriz[y]=[i+10 for i in matriz[y]]
 print(' ')
 for i in matriz:
    print(*i, sep=' ')
