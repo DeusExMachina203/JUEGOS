@@ -72,4 +72,21 @@ for y in range(matriz):
 			matriz[y][x]+=1
 		if matriz[y][x+1]=="B":
 			matriz[y][x]+=1
+	else:
+		if matriz[y-1][x-1]=="B":
+			matriz[y][x]+=1
+		if matriz[y-1][x]=="B":
+			matriz[y][x]+=1
+		if matriz[y-1][x+1]=="B":
+			matriz[y][x]+=1
+		if matriz[y][x-1]=="B":
+			matriz[y][x]+=1
+		if matriz[y][x+1]=="B":
+			matriz[y][x]+=1
+		if matriz[y+1][x-1]=="B":
+			matriz[y][x]+=1
+		if matriz[y+1][x]=="B":
+			matriz[y][x]+=1
+		if matriz[y+1][x+1]=="B":
+			matriz[y][x]+=1
     x+=1
