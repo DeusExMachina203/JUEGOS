@@ -178,7 +178,7 @@ def revelador(y,x):
             derecha+=1
         elif matriz [y+1][x]==0:
             y+=1
-            matriz[y][x]-=10fF
+            matriz[y][x]-=10
             arriba+=1
         elif matriz[y-1][x]==0:
             y-=1
