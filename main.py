@@ -1,5 +1,39 @@
 import random
 
+def Menu():
+    running=True
+    while running:
+        print('Bienvenido a Minasjaj')
+        print('Por Favor Elija Dificultad:')
+        print('-----------------------------')
+        print('1) Facil')
+        print('2) Medio')
+        print('3) Dificil')
+        print('4) Personalizado')
+        dificultad=int(input('Ingrese Numero de Dificultad: '))
+        if dificultad==1:
+            alto=8
+            ancho=8
+            numminas=10
+            running=False
+        elif dificultad==2:
+            alto=16
+            ancho=16
+            numminas=40
+            running=False
+        elif dificultad==3:
+            alto=16
+            ancho=30
+            numminas=99
+            running=False
+        elif dificultad==4:
+            alto=int(input('Numero de Filas: '))
+            ancho=int(input('Numero de Columnas: ' ))
+            numminas=int(input('Numero de Minas: '))
+            running=False
+        else: print('Invalid input')
+    return (alto, ancho, numminas)
+
 def generador(alto,ancho,numminas):
     cont=0
     matriz=[]
@@ -115,40 +149,6 @@ def generador(alto,ancho,numminas):
 
     return matriz
 
-def Menu():
-    running=True
-    while running:
-        print('Bienvenido a Minasjaj')
-        print('Por Favor Elija Dificultad:')
-        print('-----------------------------')
-        print('1) Facil')
-        print('2) Medio')
-        print('3) Dificil')
-        print('4) Personalizado')
-        dificultad=int(input('Ingrese Numero de Dificultad: '))
-        if dificultad==1:
-            alto=8
-            ancho=8
-            numminas=10
-            running=False
-        elif dificultad==2:
-            alto=16
-            ancho=16
-            numminas=40
-            running=False
-        elif dificultad==3:
-            alto=16
-            ancho=30
-            numminas=99
-            running=False
-        elif dificultad==4:
-            alto=int(input('Numero de Filas: '))
-            ancho=int(input('Numero de Columnas: ' ))
-            numminas=int(input('Numero de Minas: '))
-            running=False
-        else: print('Invalid input')
-    return (alto, ancho, numminas)
-
 
 (alto,ancho,numminas)=Menu()
 matriz = generador(alto, ancho, numminas)
@@ -161,15 +161,12 @@ yi=int(input())
 xi=int(input())
 rev=[matriz[yi][xi]]
 
-while contador<:
-    for y in ['']
-
 def revelador(y,x):
     arriba=0
     abajo=0
     derecha = 0
     izquierda = 0
-    while
+    while 0 not in arriba or 0 not in abajo or 0 not in derecha or 0 not in izquierda:
         yi=y
         xi=x
         if matriz[y][x+1]==0:
@@ -188,5 +185,5 @@ def revelador(y,x):
             y+=1
             matriz[y][x]-=10
             izquierda+=1
-        else:
+        #else: print
 
