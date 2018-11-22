@@ -459,7 +459,7 @@ def face(matriz, alto, ancho):
 
     print(' ')
     for i in skin:
-        print(*i, sep="")
+        print(*i, sep=" ")
     print(' ')
 
 
