@@ -385,6 +385,10 @@ def revelar(matriz, y, x, vic):
         vic=1
         game_over(matriz)
         return matriz, vic
+    else:
+        print('')
+        print('Invalid input')
+        return matriz, vic
 
 
 
@@ -479,7 +483,7 @@ def main():
                 x = int(input('Elija Columna de la casilla a Revelar: ')) - 1
                 if y not in range(len(matriz)) or x not in range(len(matriz[0])):
                     print('Invalid input')
-                elif matriz[y][x] in range(0,9) or matriz[y][x] in range(20,29) and y not in range(len(matriz)) and x not in range(len(matriz[y])):
+                elif matriz[y][x] in range(0,9) or matriz[y][x] in range(20,30) and y not in range(len(matriz)) and x not in range(len(matriz[y])):
                     print('')
                     print('Invalid input')
                 else:
@@ -493,7 +497,10 @@ def main():
             elif opcion == 2:
                 y = int(input('Elija Fila de la casilla a Marcar: ')) - 1
                 x = int(input('Elija Columna de la casilla a Marcar: ')) - 1
-                if matriz[y][x] in range(0, 9):
+                if y>len(matriz) or x>len(matriz[0]):
+                    print('')
+                    print('Invalid input')
+                elif matriz[y][x] in range(0, 9):
                     print('')
                     print('Invalid input')
                 else:
