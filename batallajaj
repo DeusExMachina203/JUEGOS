@@ -1,0 +1,75 @@
+import random
+def main():
+    print('Bienvenido, seleciona el tamaño de tu campo de batalla')
+    alto= int(input('Ingresa el alto:'))
+    ancho= int(input('Ingresa el ancho:'))
+    (matriz_player, matriz_pc, numbarcos) = generador(alto, ancho)
+    matriz_player = colocamiento(matriz_player, numbarcos)
+    face(matriz_player, matriz_pc, alto, ancho)
+
+def generador(alto, ancho):
+    cont = 0
+    matriz_player = []
+    matriz_pc = []
+    numbarcos = int(alto*ancho*0.256)
+
+    for i in range(alto):
+        matriz_player.append([10] * ancho)
+        matriz_pc.append([10] * ancho)
+    matriz_player = colocamiento(matriz_player, numbarcos)
+    while cont < numbarcos:
+        x = random.randint(0, ancho - 1)
+        y = random.randint(0, alto - 1)
+        if matriz_pc[y][x] == 10:
+            matriz_pc[y][x] = 12
+            cont += 1
+        else:
+            cont += 0
+    return matriz_player, matriz_pc, numbarcos
+
+
+def colocamiento(matriz_player, numbarcos):
+    cont=0
+    while cont<numbarcos:
+        y=int(input('Fila en la que estara tu barco'))
+        x=int(input('Columna en la que estara tu barco'))
+        matriz_player[y][x]=11
+        cont+=1
+    return matriz_player
+
+
+
+def face(matriz_player, matriz_pc, alto, ancho):
+    skin_player = []
+    skin_pc = []
+
+    for i in range(alto):
+        skin_player.append([0] * ancho)
+        skin_pc.append([0] * ancho)
+    for i in range(len(skin_player)):
+        for o in range(len(skin_player[i])):
+            if matriz_player[i][o]== 10:
+                skin_player[i][o] = '⍰'
+            elif matriz_player[i][o] == 11:
+                skin_player[i][o] = '⌺'
+            elif matriz_player[i][o]== 1:
+                skin_player[i][o] = '⍁'
+            elif matriz_player[i][o] == 0:
+                skin_player[i][o] = '⎕'
+        for o in range(len(skin_pc[i])):
+            if matriz_pc[i][o] in range (10,15):
+                skin_pc[i][o] = '⍰'
+            elif matriz_pc[i][o] == 2:
+                skin_pc[i][o] = '⍁'
+            elif skin_pc[i][o] == 0:
+                skin_pc[i][o] = '⎕'
+
+    print(' ')
+    for i in skin_player:
+        print(*i, sep='')
+    print(' ')
+    for i in skin_pc:
+        print(*i, sep='')
+    print(' ')
+
+main()
