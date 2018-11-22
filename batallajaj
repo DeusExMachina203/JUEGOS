@@ -11,7 +11,7 @@ def generador(alto, ancho):
     cont = 0
     matriz_player = []
     matriz_pc = []
-    numbarcos = int(alto*ancho*0.256)
+    numbarcos = int(round(alto*ancho*0.25, 2))
 
     for i in range(alto):
         matriz_player.append([10] * ancho)
