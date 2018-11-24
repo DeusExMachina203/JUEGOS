@@ -1,75 +1,188 @@
 import random
-def main():
-    print('Bienvenido, seleciona el tamaño de tu campo de batalla')
-    alto= int(input('Ingresa el alto:'))
-    ancho= int(input('Ingresa el ancho:'))
-    (matriz_player, matriz_pc, numbarcos) = generador(alto, ancho)
-    matriz_player = colocamiento(matriz_player, numbarcos)
-    face(matriz_player, matriz_pc, alto, ancho)
+
+def menu_inicio():
+    print('Bienvenido a Barcosjaj')
+    print('------------------------------')
+
+    running=True
+    while running:
+        alto= int(input('Ingresa el alto: '))
+        ancho= int(input('Ingresa el ancho: '))
+        if alto>0 and ancho>0 and alto*ancho>3:
+            running = False
+            return alto, ancho
+        else:
+            texto('El campo de batalla es muy pequeño')
+
+def texto(frase):
+    print('')
+    print(frase)
+    print('')
 
 def generador(alto, ancho):
     cont = 0
     matriz_player = []
     matriz_pc = []
-    numbarcos = int(round(alto*ancho*0.25, 2))
+    numbarcos = int(alto*ancho*0.25)
+    running = True
 
     for i in range(alto):
         matriz_player.append([10] * ancho)
         matriz_pc.append([10] * ancho)
-    matriz_player = colocamiento(matriz_player, numbarcos)
     while cont < numbarcos:
-        x = random.randint(0, ancho - 1)
-        y = random.randint(0, alto - 1)
+        x = random.randint(0, ancho-1)
+        y = random.randint(0, alto-1)
         if matriz_pc[y][x] == 10:
             matriz_pc[y][x] = 12
             cont += 1
-        else:
-            cont += 0
     return matriz_player, matriz_pc, numbarcos
 
 
 def colocamiento(matriz_player, numbarcos):
     cont=0
     while cont<numbarcos:
-        y=int(input('Fila en la que estara tu barco'))
-        x=int(input('Columna en la que estara tu barco'))
-        matriz_player[y][x]=11
-        cont+=1
+        y=int(input('Fila en la que estara tu barco: '))-1
+        x=int(input('Columna en la que estara tu barco: '))-1
+        if y not in range(0, len(matriz_player)) or x not in range(0, len(matriz_player[0])):
+            texto('Fuera de Rango')
+            continue
+        if matriz_player[y][x] != 11:
+            matriz_player[y][x] = 11
+            cont += 1
+            face_player(matriz_player,len(matriz_player),len(matriz_player[0]))
+        else:
+                texto('Ya hay un barco ahi')
     return matriz_player
 
 
 
-def face(matriz_player, matriz_pc, alto, ancho):
+def face_player(matriz_player, alto, ancho):
     skin_player = []
-    skin_pc = []
 
     for i in range(alto):
         skin_player.append([0] * ancho)
+        for i in range(len(skin_player)):
+            for o in range(len(skin_player[i])):
+                if matriz_player[i][o]== 10:
+                    skin_player[i][o] = '⍰'
+                elif matriz_player[i][o] == 11:
+                    skin_player[i][o] = '⌺'
+                elif matriz_player[i][o]== 1:
+                    skin_player[i][o] = '⍁'
+                elif matriz_player[i][o] == 0:
+                    skin_player[i][o] = '⎕'
+
+    print(' ')
+    for i in skin_player:
+        print(*i, sep=' ')
+    print(' ')
+
+
+def face_pc(matriz_pc, alto, ancho):
+    skin_pc = []
+    for i in range(alto):
         skin_pc.append([0] * ancho)
-    for i in range(len(skin_player)):
-        for o in range(len(skin_player[i])):
-            if matriz_player[i][o]== 10:
-                skin_player[i][o] = '⍰'
-            elif matriz_player[i][o] == 11:
-                skin_player[i][o] = '⌺'
-            elif matriz_player[i][o]== 1:
-                skin_player[i][o] = '⍁'
-            elif matriz_player[i][o] == 0:
-                skin_player[i][o] = '⎕'
         for o in range(len(skin_pc[i])):
-            if matriz_pc[i][o] in range (10,15):
+            if matriz_pc[i][o] == 10 or matriz_pc[i][o] == 12:
                 skin_pc[i][o] = '⍰'
             elif matriz_pc[i][o] == 2:
                 skin_pc[i][o] = '⍁'
             elif skin_pc[i][o] == 0:
                 skin_pc[i][o] = '⎕'
-
-    print(' ')
-    for i in skin_player:
-        print(*i, sep='')
     print(' ')
     for i in skin_pc:
-        print(*i, sep='')
+        print(*i, sep=' ')
     print(' ')
+
+
+
+def disparo_pc(matriz_player, alto, ancho):
+    y = random.randint(0, alto - 1)
+    x = random.randint(0, ancho - 1)
+    if matriz_player[y][x] == 10:
+        matriz_player[y][x] = 0
+    elif matriz_player[y][x] == 11:
+        matriz_player[y][x] = 1
+    else: matriz_player=disparo_pc(matriz_player,alto,ancho)
+    return matriz_player
+
+def disparo_player(matriz_pc):
+    y = int(input('Fila en la que vas a disparar: '))-1
+    x = int(input('Columna en la que vas a disparar: '))-1
+    if y>len(matriz_pc) or y<0 or x<0 or x>len(matriz_pc[0]):
+        texto('Fuera de Limites')
+        disparo_player(matriz_pc)
+    else:
+        if matriz_pc[y][x]==10:
+            matriz_pc[y][x] = 0
+        elif matriz_pc[y][x] == 12:
+            matriz_pc[y][x] = 2
+        else:
+            texto('Ya disparaste ahi')
+            disparo_player(matriz_pc)
+    return matriz_pc
+
+def victoria(matriz_pc,vic):
+    contador=0
+    for i in range(len(matriz_pc)):
+        for a in range(len(matriz_pc[i])):
+            if matriz_pc[i][a]==12:
+                contador+=1
+    if contador==0:
+        vic=1
+        texto('Felicidades!!!!')
+        texto('Has Ganado!!!!')
+    else: vic=0
+    return vic
+
+def derrota(matriz_player,vic):
+    contador=0
+    for i in range(len(matriz_player)):
+        for a in range(len(matriz_player[i])):
+            if matriz_player[i][a]==11:
+                contador+=1
+    if contador==0:
+        vic=2
+        texto('Lo Siento')
+        texto('Has Perdido :(')
+    else: vic=0
+    return vic
+
+def main():
+    vic=0
+    (alto, ancho)=menu_inicio()
+    print('')
+    print('Ahora generaremos el campo de batalla')
+    print('')
+    (matriz_player, matriz_pc, numbarcos) = generador(alto, ancho)
+    texto('Asi se ve tu area')
+    face_player(matriz_player,alto,ancho)
+    texto('Asi se ve el area de tu oponente')
+    face_pc(matriz_pc,alto,ancho)
+    print('')
+    print('Ahora colocaremos tus barcos. Tu openente hara lo mismo. Colocaremos',numbarcos,'barcos')
+    print('')
+    matriz_player = colocamiento(matriz_player, numbarcos)
+    texto('Asi quedo tu area')
+    face_player(matriz_player, alto, ancho)
+    texto('Asi quedo el area de tu oponente')
+    face_pc(matriz_pc, alto, ancho)
+    running = True
+    while running:
+        texto('Dispara a tu oponente')
+        disparo_player(matriz_pc)
+        vic=victoria(matriz_pc,vic)
+        if vic==1:
+            break
+        texto('Este es el resultado')
+        face_pc(matriz_pc, alto, ancho)
+        texto('Ahora tu oponente disparara')
+        disparo_pc(matriz_player, alto, ancho)
+        vic=derrota(matriz_player,vic)
+        if vic==2:
+            break
+        texto('Este fue el resultado')
+        face_player(matriz_player, alto, ancho)
+
 
 main()
