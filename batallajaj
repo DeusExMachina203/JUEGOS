@@ -27,6 +27,13 @@ def texto(frase):
     print('------------------------------')
     print('')
 
+def texto_num(frase,numbarcos):
+    print('')
+    print('------------------------------')
+    print(frase, numbarcos)
+    print('------------------------------')
+    print('')
+
 def generador(alto, ancho):
     cont = 0
     matriz_player = []
@@ -121,25 +128,28 @@ def disparo_pc(matriz_player, alto, ancho):
     return matriz_player
 
 def disparo_player(matriz_pc):
-    y = int(input('Fila en la que vas a disparar: '))-1
-    if y=='':
+    contador=0
+    while contador<1:
+        y = int(input('Fila en la que vas a disparar: '))-1
+        if y=='':
             texto('No input detected')
             continue
-    x = int(input('Columna en la que vas a disparar: '))-1
-    if x=='':
+        x = int(input('Columna en la que vas a disparar: '))-1
+        if x=='':
             texto('No input detected')
             continue
-    if y>len(matriz_pc) or y<0 or x<0 or x>len(matriz_pc[0]):
-        texto('Fuera de Limites')
-        disparo_player(matriz_pc)
-    else:
-        if matriz_pc[y][x]==10:
-            matriz_pc[y][x] = 0
-        elif matriz_pc[y][x] == 12:
-            matriz_pc[y][x] = 2
+        if y>len(matriz_pc) or y<0 or x<0 or x>len(matriz_pc[0]):
+            texto('Fuera de Limites')
+            continue
         else:
-            texto('Ya disparaste ahi')
-            disparo_player(matriz_pc)
+            if matriz_pc[y][x]==10:
+                matriz_pc[y][x] = 0
+            elif matriz_pc[y][x] == 12:
+                matriz_pc[y][x] = 2
+                contador+=1
+            else:
+                texto('Ya disparaste ahi')
+                continue
     return matriz_pc
 
 def victoria(matriz_pc,vic):
@@ -171,17 +181,13 @@ def derrota(matriz_player,vic):
 def main():
     vic=0
     (alto, ancho)=menu_inicio()
-    print('')
-    print('Ahora generaremos el campo de batalla')
-    print('')
+    texto('Ahora generaremos el campo de batalla')
     (matriz_player, matriz_pc, numbarcos) = generador(alto, ancho)
     texto('Asi se ve tu area')
     face_player(matriz_player,alto,ancho)
     texto('Asi se ve el area de tu oponente')
     face_pc(matriz_pc,alto,ancho)
-    print('')
-    print('Ahora colocaremos tus barcos. Tu openente hara lo mismo. Colocaremos',numbarcos,'barcos')
-    print('')
+    texto_num('Ahora colocaremos tus barcos. Tu openente hara lo mismo. Barcos a colocar:',numbarcos)
     matriz_player = colocamiento(matriz_player, numbarcos)
     texto('Asi quedo tu area')
     face_player(matriz_player, alto, ancho)
