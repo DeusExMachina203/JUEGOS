@@ -7,7 +7,13 @@ def menu_inicio():
     running=True
     while running:
         alto= int(input('Ingresa el alto: '))
+        if alto=='':
+            texto('No input detected')
+            continue
         ancho= int(input('Ingresa el ancho: '))
+        if ancho=='':
+            texto('No input detected')
+            continue
         if alto>0 and ancho>0 and alto*ancho>3:
             running = False
             return alto, ancho
@@ -16,7 +22,9 @@ def menu_inicio():
 
 def texto(frase):
     print('')
+    print('------------------------------')
     print(frase)
+    print('------------------------------')
     print('')
 
 def generador(alto, ancho):
@@ -42,7 +50,13 @@ def colocamiento(matriz_player, numbarcos):
     cont=0
     while cont<numbarcos:
         y=int(input('Fila en la que estara tu barco: '))-1
+        if y=='':
+            texto('No input detected')
+            continue
         x=int(input('Columna en la que estara tu barco: '))-1
+        if x=='':
+            texto('No input detected')
+            continue
         if y not in range(0, len(matriz_player)) or x not in range(0, len(matriz_player[0])):
             texto('Fuera de Rango')
             continue
@@ -108,7 +122,13 @@ def disparo_pc(matriz_player, alto, ancho):
 
 def disparo_player(matriz_pc):
     y = int(input('Fila en la que vas a disparar: '))-1
+    if y=='':
+            texto('No input detected')
+            continue
     x = int(input('Columna en la que vas a disparar: '))-1
+    if x=='':
+            texto('No input detected')
+            continue
     if y>len(matriz_pc) or y<0 or x<0 or x>len(matriz_pc[0]):
         texto('Fuera de Limites')
         disparo_player(matriz_pc)
