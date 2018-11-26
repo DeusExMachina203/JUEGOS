@@ -181,9 +181,9 @@ def revelar(matriz, y, x, vic):
             elif x == len(matriz[y]) - 1:
                 if matriz[y][x - 1] == 10:
                     revelar(matriz, y, x - 1, vic)
-                if matriz[y - 1][x - 1] == 10:
+                if matriz[y + 1][x - 1] == 10:
                     revelar(matriz, y - 1, x - 1, vic)
-                if matriz[y - 1][x] == 10:
+                if matriz[y + 1][x] == 10:
                     revelar(matriz, y - 1, x, vic)
 
                 if matriz[y][x - 1] in range(11, 19):
@@ -519,3 +519,4 @@ def main():
 
 
 main()
+
