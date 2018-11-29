@@ -249,6 +249,7 @@ def derrota(matriz_player,vic):
     else: vic=0
     return vic
 def leyenda():
+    time.sleep(1)
     print('Leyenda:')
     print('⍰ = No descubierto')
     print('⌺ = Barco')
@@ -256,9 +257,13 @@ def leyenda():
     print('⎕ = Disparo fallido')
 def instrucciones():
     print('1)En este juego combatirás contra la computadora e intentarás hundir sus navíos.')
+    time.sleep(1)
     print('2)Para lograrlo, deberas adivinarla locación de los barcos enemigos y disparar.')
+    time.sleep(1)
     print('3)Se te pedirá la altitud  y la latitud a la que deseas disparar y se ejecutará el tiro.')
+    time.sleep(1)
     print('4)Ganarás solo si logras hundir todos barcos enemigos.')
+    time.sleep(1)
     print('5)Perderás si todos tus navíos sun hundidos.')
 def main():
     vic=0
@@ -283,7 +288,7 @@ def main():
             break
         texto('Este es el estado del enemigo')
         face_pc(matriz_pc, alto, ancho)
-        time.sleep(3)
+        time.sleep(2)
         texto('Ahora tu oponente disparará')
         disparo_pc(matriz_player, alto, ancho)
         vic=derrota(matriz_player,vic)
