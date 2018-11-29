@@ -1,4 +1,5 @@
 import random
+import time
 
 def menu_inicio():
     print('Bienvenido a Barcosjaj')
@@ -267,7 +268,7 @@ def main():
     leyenda()
     texto('Así se ve tu area')
     face_player(matriz_player,alto,ancho)
-    texto_num('Ahora colocaremos tus barcos. Tu openente hara lo mismo. Barcos a colocar:',' ', numbarcos)
+    texto_num('Ahora colocaremos tus barcos. Tu openente hara lo mismo. Barcos a colocar:', numbarcos)
     matriz_player = colocamiento(matriz_player, numbarcos)
     texto('Asi quedo tu area')
     face_player(matriz_player, alto, ancho)
@@ -282,6 +283,7 @@ def main():
             break
         texto('Este es el estado del enemigo')
         face_pc(matriz_pc, alto, ancho)
+        time.sleep(3)
         texto('Ahora tu oponente disparará')
         disparo_pc(matriz_player, alto, ancho)
         vic=derrota(matriz_player,vic)
@@ -292,5 +294,3 @@ def main():
 
 
 main()
-
-
